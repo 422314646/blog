@@ -1,0 +1,3 @@
+2020-01-30 21:18:49.672  INFO 7888 --- [restartedMain] com.lrm.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EIOMDQM with PID 7888 (F:\Blog\blog\target\classes started by Mr.wang in F:\Blog\blog)
+2020-01-30 21:18:49.674  INFO 7888 --- [restartedMain] com.lrm.blog.BlogApplication             : The following profiles are active: pro
+2020-01-30 21:19:00.703  INFO 7888 --- [restartedMain] com.lrm.blog.BlogApplication             : Started BlogApplication in 12.701 seconds (JVM running for 16.983)
