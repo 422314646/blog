@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_user")
 public class User {
@@ -17,6 +20,7 @@ public class User {
     private String password;
     private String email;
     private String avatar;
+    private Integer type;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
@@ -76,6 +80,14 @@ public class User {
         this.avatar = avatar;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -91,6 +103,7 @@ public class User {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 
     public List<Blog> getBlogs() {
         return blogs;
@@ -109,6 +122,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", type=" + type +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

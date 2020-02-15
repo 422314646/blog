@@ -17,18 +17,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+/**
+ * Created by limi on 2017/10/16.
+ */
 
 @Controller
 @RequestMapping("/admin")
 public class TypeController {
-
 
     @Autowired
     private TypeService typeService;
 
     @GetMapping("/types")
     public String types(@PageableDefault(size = 3,sort = {"id"},direction = Sort.Direction.DESC)
-                                Pageable pageable, Model model) {
+                                    Pageable pageable, Model model) {
         model.addAttribute("page",typeService.listType(pageable));
         return "admin/types";
     }
@@ -45,17 +47,18 @@ public class TypeController {
         return "admin/types-input";
     }
 
+
     @PostMapping("/types")
-    public String post(@Valid Type type, BindingResult result, RedirectAttributes attributes) {
+    public String post(@Valid Type type,BindingResult result, RedirectAttributes attributes) {
         Type type1 = typeService.getTypeByName(type.getName());
         if (type1 != null) {
-            result.rejectValue("name", "nameError", "不能重复添加");
+            result.rejectValue("name","nameError","不能添加重复的分类");
         }
         if (result.hasErrors()) {
             return "admin/types-input";
         }
         Type t = typeService.saveType(type);
-        if (t == null) {
+        if (t == null ) {
             attributes.addFlashAttribute("message", "新增失败");
         } else {
             attributes.addFlashAttribute("message", "新增成功");
@@ -63,18 +66,18 @@ public class TypeController {
         return "redirect:/admin/types";
     }
 
+
     @PostMapping("/types/{id}")
     public String editPost(@Valid Type type, BindingResult result,@PathVariable Long id, RedirectAttributes attributes) {
         Type type1 = typeService.getTypeByName(type.getName());
         if (type1 != null) {
-            System.out.println(type.getName());
-            result.rejectValue("name", "nameError", "不能重复添加");
+            result.rejectValue("name","nameError","不能添加重复的分类");
         }
         if (result.hasErrors()) {
             return "admin/types-input";
         }
-        Type t = typeService.updateType(id, type);
-        if (t == null) {
+        Type t = typeService.updateType(id,type);
+        if (t == null ) {
             attributes.addFlashAttribute("message", "更新失败");
         } else {
             attributes.addFlashAttribute("message", "更新成功");
@@ -88,4 +91,6 @@ public class TypeController {
         attributes.addFlashAttribute("message", "删除成功");
         return "redirect:/admin/types";
     }
+
+
 }

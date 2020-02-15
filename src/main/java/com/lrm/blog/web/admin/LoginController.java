@@ -1,6 +1,5 @@
 package com.lrm.blog.web.admin;
 
-
 import com.lrm.blog.po.User;
 import com.lrm.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * Created by limi on 2017/10/15.
+ */
 @Controller
 @RequestMapping("/admin")
 public class LoginController {
+
 
     @Autowired
     private UserService userService;
@@ -25,18 +28,19 @@ public class LoginController {
         return "admin/login";
     }
 
+
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         HttpSession session,
-                        RedirectAttributes attributes){
+                        RedirectAttributes attributes) {
         User user = userService.checkUser(username, password);
         if (user != null) {
             user.setPassword(null);
             session.setAttribute("user",user);
             return "admin/index";
-        }else {
-            attributes.addFlashAttribute("message", "用户名和密码不正确");
+        } else {
+            attributes.addFlashAttribute("message", "用户名和密码错误");
             return "redirect:/admin";
         }
     }
