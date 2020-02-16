@@ -3,6 +3,7 @@ package com.lrm.blog.web;
 import com.lrm.blog.service.BlogService;
 import com.lrm.blog.service.TagService;
 import com.lrm.blog.service.TypeService;
+import com.lrm.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -50,4 +51,11 @@ public class IndexController {
         model.addAttribute("blog", blogService.getAndConvert(id));
         return "blog";
     }
+
+    @GetMapping("/footer/newblog")
+    public String newblogs(Model model) {
+        model.addAttribute("newblogs", blogService.listRecommendBlogTop(3));
+        return "_fragments :: newblogList";
+    }
+
 }
